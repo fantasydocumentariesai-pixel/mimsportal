@@ -139,7 +139,7 @@ export default function App() {
     );
   }
 
-  if (view === 'splash') {
+if (view === 'splash') {
   return (
     <div className="fixed inset-0 bg-white z-[200]">
       {/* The Real Website */}
