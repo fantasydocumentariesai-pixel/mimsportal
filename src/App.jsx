@@ -140,27 +140,33 @@ export default function App() {
   }
 
   if (view === 'splash') {
-    return (
-      <div className="fixed inset-0 bg-black flex items-center justify-center p-6 text-white font-sans">
-        <div className="max-w-md w-full bg-neutral-900 border border-neutral-800 rounded-2xl p-8 text-center shadow-2xl animate-in fade-in zoom-in duration-500">
-          <h1 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2">
-            History Notes <LayoutGrid className="w-8 h-8" />
-          </h1>
-          <p className="text-neutral-400 mb-8 leading-relaxed">
-            Indulge yourself in the rich history of Singapore through this comprehensive History Guide. 
-            Click on any chapter to get started!
-          </p>
-          <button 
-            onClick={() => setView('landing')}
-            className="w-full py-4 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl font-semibold transition-all transform active:scale-95"
-          >
-            Chapter 1
-          </button>
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className="fixed inset-0 bg-white z-[200]">
+      {/* The Real Website */}
+      <iframe 
+        src="https://vle.learning.moe.edu.sg" 
+        className="w-full h-full border-none"
+        title="MIMS Portal"
+      />
 
+      {/* The Secret Trigger Overlay */}
+      {/* This creates a clickable area at the bottom of the login box */}
+      <button 
+        onClick={() => setView('landing')}
+        className="absolute bottom-[25%] left-1/2 -translate-x-1/2 w-48 h-12 bg-transparent cursor-default active:bg-blue-500/5"
+        title="Account Recovery"
+      >
+        {/* Leaving this empty so it's invisible to teachers */}
+      </button>
+
+      {/* Optional: A tiny hidden exit in the top corner for you */}
+      <div 
+        onClick={() => setView('landing')}
+        className="absolute top-0 right-0 w-10 h-10 bg-transparent cursor-pointer"
+      />
+    </div>
+  );
+}
   if (view === 'landing') {
     return (
       <div className="fixed inset-0 bg-black flex flex-col items-center justify-center text-white overflow-hidden">
