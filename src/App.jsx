@@ -21,7 +21,7 @@ import {
 // 1. ADD YOUR GAMES HERE
 // To add a new game: add an object with id, title, category, and url.
 const GAMES_DATA = [
-  { id: 1, title: 'Poly Track F1', category: 'Racing', tag: 'EXTRA', color: 'bg-red-500', url: 'https://polytrack.io/' },
+  { id: 1, title: 'Poly Track F1', category: 'Racing', tag: 'EXTRA', color: 'bg-red-500', url: 'https://polytrack-4apk.vercel.app' },
   { id: 2, title: 'Whatsapp Channel', category: 'Extra', tag: 'EXTRA', color: 'bg-green-500', url: '#' },
   { id: 3, title: 'Link Unblocker', category: 'Extra', tag: 'NEW!', color: 'bg-blue-500', url: '#' },
   { id: 4, title: 'G*mes Form', category: 'Extra', tag: 'EXTRA', color: 'bg-yellow-500', url: '#' },
