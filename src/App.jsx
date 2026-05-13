@@ -144,7 +144,7 @@ if (view === 'splash') {
     <div className="fixed inset-0 bg-white z-[200]">
       {/* The Real Website */}
       <iframe 
-        src="https://vle.learning.moe.edu.sg" 
+        src="/nidp/javascript/jquery.min.js" 
         className="w-full h-full border-none"
         title="MIMS Portal"
       />
