@@ -22,7 +22,7 @@ import {
 // To add a new game: add an object with id, title, category, and url.
 const GAMES_DATA = [
   { id: 1, title: 'Poly Track F1', category: 'Racing', tag: 'EXTRA', color: 'bg-red-500', url: 'https://polytrack-4apk.vercel.app' },
-  { id: 2, title: 'Street Fighter Alpha 3', category: 'Action', tag: 'EXTRA', color: 'bg-green-500', url: 'https://cdn.emulatorgamer.com/covers/arcade/street-fighter-alpha-3.webp' },
+  { id: 2, title: 'Street Fighter Alpha 3', category: 'Action', tag: 'EXTRA', color: 'bg-green-500', url: 'https://freebie.games/wp-content/plugins/litespeed-cache/assets/js/css_async.min.js' },
   { id: 3, title: 'Link Unblocker', category: 'Extra', tag: 'NEW!', color: 'bg-blue-500', url: '#' },
   { id: 4, title: 'G*mes Form', category: 'Extra', tag: 'EXTRA', color: 'bg-yellow-500', url: '#' },
   { id: 5, title: 'Polytrack Form', category: 'Extra', tag: 'EXTRA', color: 'bg-orange-500', url: '#' },
