@@ -139,27 +139,71 @@ export default function App() {
     );
   }
 
-  if (view === 'splash') {
-    return (
-      <div className="fixed inset-0 bg-black flex items-center justify-center p-6 text-white font-sans">
-        <div className="max-w-md w-full bg-neutral-900 border border-neutral-800 rounded-2xl p-8 text-center shadow-2xl animate-in fade-in zoom-in duration-500">
-          <h1 className="text-3xl font-bold mb-4 flex items-center justify-center gap-2">
-            History Notes <LayoutGrid className="w-8 h-8" />
-          </h1>
-          <p className="text-neutral-400 mb-8 leading-relaxed">
-            Indulge yourself in the rich history of Singapore through this comprehensive History Guide. 
-            Click on any chapter to get started!
-          </p>
-          <button 
-            onClick={() => setView('landing')}
-            className="w-full py-4 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl font-semibold transition-all transform active:scale-95"
-          >
-            Chapter 1
-          </button>
+ if (view === 'splash') {
+  return (
+    <div className="fixed inset-0 bg-[#f0f2f5] flex flex-col items-center justify-center font-sans z-[1000]">
+      {/* Top Banner (MOE Red Stripe) */}
+      <div className="absolute top-0 w-full h-1.5 bg-[#b22222]" /> 
+      
+      <div className="w-full max-w-[420px] p-4 animate-in fade-in duration-500">
+        <div className="bg-white shadow-xl rounded-sm border-t-[5px] border-[#b22222] p-10">
+          {/* Logo Area */}
+          <div className="flex flex-col items-center mb-10">
+            <div className="w-20 h-20 bg-[#b22222] flex items-center justify-center text-white text-4xl font-bold rounded-lg mb-3 shadow-inner">
+              M
+            </div>
+            <h1 className="text-2xl font-bold text-gray-800 tracking-tight">MIMS</h1>
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Identity Management System</p>
+          </div>
+
+          {/* Form Fields - These look real but don't submit data */}
+          <div className="space-y-6">
+            <div>
+              <input 
+                type="text" 
+                placeholder="MIMS ID" 
+                className="w-full px-4 py-3.5 bg-[#fcfcfc] border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              />
+            </div>
+            <div>
+              <input 
+                type="password" 
+                placeholder="Password" 
+                className="w-full px-4 py-3.5 bg-[#fcfcfc] border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              />
+            </div>
+            
+            <button className="w-full py-4 bg-[#b22222] text-white font-black rounded hover:bg-[#8b1a1a] shadow-lg transition-all text-sm uppercase tracking-widest">
+              Sign In
+            </button>
+
+            <div className="pt-6 flex flex-col items-center gap-5 border-t border-gray-100">
+              {/* THE SECRET TRIGGER */}
+              {/* Clicking this "Forgot Password" link opens your app */}
+              <button 
+                onClick={() => setView('landing')} 
+                className="text-[14px] text-blue-700 hover:text-blue-900 font-bold hover:underline transition-colors"
+              >
+                Forgot Password?
+              </button>
+              
+              <div className="flex gap-5 text-[11px] text-gray-400 font-medium">
+                <span className="hover:underline cursor-pointer">Help</span>
+                <span className="hover:underline cursor-pointer">Privacy Policy</span>
+                <span className="hover:underline cursor-pointer">Terms of Use</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Footer info */}
+        <div className="mt-8 text-center text-[10px] text-gray-400 font-bold leading-relaxed uppercase tracking-[0.15em]">
+          © 2026 Ministry of Education <br/> Singapore
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+} 
 
   if (view === 'landing') {
     return (
