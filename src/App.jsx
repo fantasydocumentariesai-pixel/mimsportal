@@ -434,6 +434,7 @@ function Particles({ theme }) {
     </div>
   );
 }
+
 export default App
 import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root');
