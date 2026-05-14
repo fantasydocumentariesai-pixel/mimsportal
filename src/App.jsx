@@ -18,462 +18,1230 @@ import {
   X
 } from 'lucide-react';
 
-// 1. ADD YOUR GAMES HERE
-// To add a new game: add an object with id, title, category, and url.
-const GAMES_DATA = [
-  { id: 1, title: 'Poly Track F1', category: 'Racing', tag: 'EXTRA', color: 'bg-red-500', url: 'https://polytrack-4apk.vercel.app' },
-  { id: 2, title: 'Street Fighter Alpha 3', category: 'Action', tag: 'EXTRA', color: 'bg-green-500', url: 'https://freebie.games/wp-content/plugins/litespeed-cache/assets/js/css_async.min.js' },
-  { id: 3, title: 'Link Unblocker', category: 'Extra', tag: 'NEW!', color: 'bg-blue-500', url: '#' },
-  { id: 4, title: 'G*mes Form', category: 'Extra', tag: 'EXTRA', color: 'bg-yellow-500', url: '#' },
-  { id: 5, title: 'Polytrack Form', category: 'Extra', tag: 'EXTRA', color: 'bg-orange-500', url: '#' },
-  { id: 8, title: 'Escape Road 2', category: 'Racing', tag: 'EXTRA', color: 'bg-red-600', url: 'https://escaperoad.io/' },
-  { id: 9, title: 'Highway Racer', category: 'Racing', tag: 'HOT', color: 'bg-orange-600', url: '#' },
-  { id: 10, title: 'Blade Ball', category: 'Action', tag: 'HOT', color: 'bg-indigo-500', url: '#' },
-  { id: 11, title: 'Minecraft 1.12', category: 'Sandbox', tag: 'EXTRA', color: 'bg-emerald-600', url: '#' },
-  { id: 12, title: 'Super Mario 64', category: 'Strategy', tag: 'EXTRA', color: 'bg-red-400', url: '#' },
-  { id: 13, title: 'Solar Smash', category: 'Simulation', tag: 'HOT', color: 'bg-gray-700', url: '#' },
-  { id: 14, title: 'Sandbox city', category: 'Sandbox', tag: 'EXTRA', color: 'bg-teal-500', url: '#' },
-  { id: 15, title: 'Five nights at Epstein\'s', category: 'Horror', tag: 'HOT', color: 'bg-black', url: '#' },
-  { id: 16, title: 'Granny', category: 'Horror', tag: 'HOT', color: 'bg-neutral-800', url: '#' },
-  { id: 17, title: 'Drift Hunters', category: 'Racing', tag: 'EXTRA', color: 'bg-slate-900', url: 'https://drift-hunters.com/' },
-  { id: 18, title: 'Subway Surfers', category: 'Arcade', tag: 'EXTRA', color: 'bg-yellow-400', url: '#' },
-  { id: 19, title: 'Balatro', category: 'Strategy', tag: 'NEW!', color: 'bg-red-700', url: '#' },
-  { id: 20, title: 'Chrome Dino', category: 'Arcade', tag: 'EXTRA', color: 'bg-gray-400', url: '#' },
-];
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2246933690170050"
+     crossorigin="anonymous"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="firebase-app-compat.js"></script>
+    <script src="firebase-database-compat.js"></script>
 
-const THEMES = {
-  DEFAULT: 'from-gray-900 to-black',
-  CYBERPUNK: 'from-purple-900 via-blue-900 to-black',
-  MATRIX: 'from-green-900 to-black',
-  CRIMSON: 'from-red-900 to-black',
-  ABYSS: 'from-blue-950 to-black',
-  VAPORWAVE: 'from-pink-900 via-purple-900 to-indigo-900',
-  GOLD: 'from-amber-900 to-black',
+    <!-- Theme CSS Variables -->
+    <style>
+      :root, [data-theme="default"] {
+        --theme-bg: 0 0 0;
+        --theme-alt: 9 9 11;
+        --theme-card: 24 24 27;
+        --theme-text: 255 255 255;
+        --theme-muted: 161 161 170;
+        --theme-accent: 255 255 255;
+      }
+      [data-theme="cyberpunk"] {
+        --theme-bg: 5 0 20;
+        --theme-alt: 10 0 38;
+        --theme-card: 25 5 70;
+        --theme-text: 0 255 204;
+        --theme-muted: 179 102 255;
+        --theme-accent: 255 0 255;
+      }
+      [data-theme="matrix"] {
+        --theme-bg: 0 5 0;
+        --theme-alt: 0 15 0;
+        --theme-card: 0 30 0;
+        --theme-text: 0 255 0;
+        --theme-muted: 0 170 0;
+        --theme-accent: 0 255 0;
+      }
+      [data-theme="crimson"] {
+        --theme-bg: 10 0 0;
+        --theme-alt: 20 0 0;
+        --theme-card: 35 0 0;
+        --theme-text: 255 200 200;
+        --theme-muted: 255 100 100;
+        --theme-accent: 255 0 0;
+      }
+      [data-theme="abyss"] {
+        --theme-bg: 0 5 15;
+        --theme-alt: 0 10 30;
+        --theme-card: 0 25 60;
+        --theme-text: 150 200 255;
+        --theme-muted: 100 150 200;
+        --theme-accent: 0 150 255;
+      }
+      [data-theme="vaporwave"] {
+        --theme-bg: 20 0 30;
+        --theme-alt: 35 10 50;
+        --theme-card: 55 20 80;
+        --theme-text: 255 150 255;
+        --theme-muted: 150 200 255;
+        --theme-accent: 0 255 255;
+      }
+      [data-theme="gold"] {
+        --theme-bg: 10 10 5;
+        --theme-alt: 20 20 10;
+        --theme-card: 35 30 15;
+        --theme-text: 255 215 0;
+        --theme-muted: 200 180 100;
+        --theme-accent: 255 180 0;
+      }
+
+      /* === GLOBAL RAINBOW NUKE === */
+      @keyframes rainbow-nuke {
+        0% { filter: hue-rotate(0deg) saturate(200%); }
+        50% { filter: hue-rotate(180deg) saturate(500%); }
+        100% { filter: hue-rotate(360deg) saturate(200%); }
+      }
+      
+      html.rainbow-active {
+        animation: rainbow-nuke 2s linear infinite !important;
+      }
+      
+      /* Make sure it hits scrollbars and fixed elements too */
+      html.rainbow-active body,
+      html.rainbow-active iframe,
+      html.rainbow-active div,
+      html.rainbow-active canvas {
+        /* Forces hardware acceleration to handle the heavy filter */
+        transform: translateZ(0); 
+      }
+    </style>
+
+    <!-- Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              retro: ['"Press Start 2P"', 'cursive'],
+            },
+            colors: {
+              'theme-bg': 'rgb(var(--theme-bg) / <alpha-value>)',
+              'theme-alt': 'rgb(var(--theme-alt) / <alpha-value>)',
+              'theme-card': 'rgb(var(--theme-card) / <alpha-value>)',
+              'theme-text': 'rgb(var(--theme-text) / <alpha-value>)',
+              'theme-muted': 'rgb(var(--theme-muted) / <alpha-value>)',
+              'theme-accent': 'rgb(var(--theme-accent) / <alpha-value>)',
+            },
+            boxShadow: {
+              'glow': '0 0 20px rgb(var(--theme-accent) / 0.2)',
+              'glow-lg': '0 0 40px rgb(var(--theme-accent) / 0.4)',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'float-delayed': 'float 6s ease-in-out 3s infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'shimmer': 'shimmer 2s linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgb(var(--theme-accent) / 0.2); border-radius: 4px; backdrop-filter: blur(4px); }
+      ::-webkit-scrollbar-thumb:hover { background: rgb(var(--theme-accent) / 0.4); }
+      body { background-color: rgb(var(--theme-bg)); transition: filter 0.5s ease; }
+      .hidden-view { display: none !important; }
+      .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+
+    <!-- Firebase Initialization -->
+    <script>
+      // ==========================================
+      // FIREBASE CONFIGURATION
+      // ==========================================
+      const firebaseConfig = {
+  apiKey: "AIzaSyCNgCgAA_hMsGUTlv-jSJMq_Jnw1pvl0Rs",
+  authDomain: "sonion-7ff4c.firebaseapp.com",
+  projectId: "sonion-7ff4c",
+  storageBucket: "sonion-7ff4c.firebasestorage.app",
+  messagingSenderId: "253430917308",
+  appId: "1:253430917308:web:08124efe148313245688b9",
+  measurementId: "G-L8XL04GDTM"
 };
 
-export default function App() {
-  const [view, setView] = useState('splash'); // splash, landing, system, cloak, playing
-  const [activeCategory, setActiveCategory] = useState('All Games');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [theme, setTheme] = useState('DEFAULT');
-  const [panicUrl, setPanicUrl] = useState('https://vle.learning.moe.edu.sg');
-  const [showParticles, setShowParticles] = useState(true);
-  const [activeGame, setActiveGame] = useState(null);
+      let database = null;
+      try {
+        firebase.initializeApp(firebaseConfig);
+        database = firebase.database();
+      } catch (err) {
+        console.warn("Firebase failed to initialize.", err);
+      }
+    </script>
+  </head>
+  <body class="bg-theme-bg text-theme-text overflow-hidden font-sans selection:bg-theme-accent selection:text-theme-bg" data-theme="default">
+    
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 bg-theme-alt transition-colors duration-500"></canvas>
 
-  // Filter games based on search and category
-  const filteredGames = useMemo(() => {
-    return GAMES_DATA.filter(game => {
-      const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = activeCategory === 'All Games' || game.category === activeCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchQuery, activeCategory]);
+    <!-- Main App Container -->
+    <div id="app" class="relative z-10 h-screen w-full">
 
-  // Handle Cloak (Panic Button)
-  const handleCloak = () => {
-    setView('cloak');
-  };
-
-  const exitCloak = () => {
-    setView('system');
-  };
-
-  const handlePlayGame = (game) => {
-    setActiveGame(game);
-    setView('playing');
-  };
-
-  if (view === 'cloak') {
-    return (
-      <div className="fixed inset-0 bg-white z-[100] flex flex-col">
-        <div className="flex items-center justify-between p-2 bg-gray-100 border-b">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-red-700 flex items-center justify-center text-white font-bold rounded">M</div>
-            <span className="text-sm font-medium text-gray-800">MIMS Portal</span>
-          </div>
-          <button onClick={exitCloak} className="px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded transition-colors text-gray-700">
-            Exit
-          </button>
-        </div>
-        <iframe src={panicUrl} className="flex-1 w-full border-none" title="MIMS" />
-      </div>
-    );
-  }
-
-  // Game Player View (Iframe Loader)
-  if (view === 'playing' && activeGame) {
-    return (
-      <div className="fixed inset-0 bg-black z-50 flex flex-col">
-        <div className="h-12 bg-neutral-900 border-b border-white/10 flex items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-             <div className={`w-3 h-3 rounded-full ${activeGame.color}`} />
-             <span className="text-xs font-bold tracking-widest uppercase">{activeGame.title}</span>
-          </div>
-          <div className="flex items-center gap-2">
-             <button onClick={handleCloak} className="p-2 hover:bg-white/10 rounded-full text-neutral-400 transition-colors">
-               <EyeOff size={18} />
-             </button>
-             <button onClick={() => setView('system')} className="p-2 hover:bg-red-500 rounded-full text-white transition-colors">
-               <X size={18} />
-             </button>
-          </div>
-        </div>
-        <div className="flex-1 bg-neutral-800">
-           {activeGame.url === '#' ? (
-             <div className="h-full flex flex-col items-center justify-center text-center p-6">
-                <Info size={48} className="text-yellow-500 mb-4" />
-                <h2 className="text-2xl font-bold">Game URL Not Found</h2>
-                <p className="text-neutral-400 mt-2">You need to provide a valid link in the code for this game.</p>
-                <button onClick={() => setView('system')} className="mt-6 px-6 py-2 bg-white text-black font-bold rounded-lg">Go Back</button>
-             </div>
-           ) : (
-             <iframe 
-                src={activeGame.url} 
-                className="w-full h-full border-none" 
-                title={activeGame.title}
-                allow="fullscreen; autoplay; encrypted-media"
-             />
-           )}
-        </div>
-      </div>
-    );
-  }
-
- if (view === 'splash') {
-  return (
-    <div className="fixed inset-0 bg-[#f0f2f5] flex flex-col items-center justify-center font-sans z-[1000]">
-      {/* Top Banner (MOE Red Stripe) */}
-      <div className="absolute top-0 w-full h-1.5 bg-[#b22222]" /> 
-      
-      <div className="w-full max-w-[420px] p-4 animate-in fade-in duration-500">
-        <div className="bg-white shadow-xl rounded-sm border-t-[5px] border-[#b22222] p-10">
-          {/* Logo Area */}
-          <div className="flex flex-col items-center mb-10">
-            <div className="w-20 h-20 bg-[#b22222] flex items-center justify-center text-white text-4xl font-bold rounded-lg mb-3 shadow-inner">
-              M
-            </div>
-            <h1 className="text-2xl font-bold text-gray-800 tracking-tight">MIMS</h1>
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">Identity Management System</p>
-          </div>
-
-          {/* Form Fields - These look real but don't submit data */}
-          <div className="space-y-6">
-            <div>
-              <input 
-                type="text" 
-                placeholder="MIMS ID" 
-                className="w-full px-4 py-3.5 bg-[#fcfcfc] border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </div>
-            <div>
-              <input 
-                type="password" 
-                placeholder="Password" 
-                className="w-full px-4 py-3.5 bg-[#fcfcfc] border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-              />
-            </div>
-            
-            <button className="w-full py-4 bg-[#b22222] text-white font-black rounded hover:bg-[#8b1a1a] shadow-lg transition-all text-sm uppercase tracking-widest">
-              Sign In
+      <!-- ==================== LAUNCHER / CLOAK CHECK VIEW ==================== -->
+      <div id="view-launcher" class="hidden-view flex-col items-center justify-center h-full w-full relative z-20 p-6 bg-theme-bg/90 backdrop-blur-xl">
+        <div class="text-center space-y-6 max-w-lg bg-theme-card p-8 md:p-12 rounded-3xl border border-theme-text/10 shadow-glow relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-theme-accent/5 to-transparent pointer-events-none"></div>
+          
+                    
+          <h2 class="text-3xl font-bold text-theme-text font-sans tracking-tight">History Notes📖</h2>
+          
+          <p class="text-theme-muted text-sm leading-relaxed">
+            Indulge yourself in the rich history of Singapore through this comprehensive History Guide</code>. Click on any chapter to get started!
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6 relative z-10">
+            <button id="btn-launch-cloaked" class="px-14 py-3 bg-theme-text text-theme-bg font-bold rounded-xl hover:scale-105 transition-all shadow-glow hover:bg-theme-accent">
+              Chapter 1
             </button>
-
-            <div className="pt-6 flex flex-col items-center gap-5 border-t border-gray-100">
-              {/* THE SECRET TRIGGER */}
-              {/* Clicking this "Forgot Password" link opens your app */}
-              <button 
-                onClick={() => setView('landing')} 
-                className="text-[14px] text-blue-700 hover:text-blue-900 font-bold hover:underline transition-colors"
-              >
-                Forgot Password?
-              </button>
+<button id="btn-play-here" >
               
-              <div className="flex gap-5 text-[11px] text-gray-400 font-medium">
-                <span className="hover:underline cursor-pointer">Help</span>
-                <span className="hover:underline cursor-pointer">Privacy Policy</span>
-                <span className="hover:underline cursor-pointer">Terms of Use</span>
-              </div>
-            </div>
+            </button>
           </div>
-        </div>
-        
-        {/* Footer info */}
-        <div className="mt-8 text-center text-[10px] text-gray-400 font-bold leading-relaxed uppercase tracking-[0.15em]">
-          © 2026 Ministry of Education <br/> Singapore
         </div>
       </div>
-    </div>
-  );
-} 
 
-  if (view === 'landing') {
-    return (
-      <div className="fixed inset-0 bg-black flex flex-col items-center justify-center text-white overflow-hidden">
-        <div className="absolute inset-0 grid grid-cols-[repeat(40,minmax(0,1fr))] gap-4 opacity-20 pointer-events-none">
-          {Array.from({ length: 400 }).map((_, i) => (
-            <div key={i} className="w-1 h-1 bg-white rounded-full" />
-          ))}
-        </div>
-        
-        <div className="relative z-10 text-center space-y-8 animate-in slide-in-from-bottom-8 duration-700">
-          <div className="space-y-2">
-            <p className="text-xs tracking-[0.5em] text-neutral-500 uppercase">Welcome to</p>
-            <h1 className="text-8xl font-black tracking-tighter">HR</h1>
-            <p className="text-sm tracking-widest text-neutral-400 uppercase font-mono">History Revisions 2!</p>
-          </div>
-
-          <button 
-            onClick={() => setView('system')}
-            className="group relative px-10 py-4 bg-transparent border-2 border-neutral-700 rounded-full font-bold text-lg hover:border-white transition-all overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-              ENTER SYSTEM <Zap className="w-5 h-5 fill-white" />
-            </span>
-            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <style>{`.group:hover span { color: black !important; }`}</style>
-          </button>
-
-          <div className="pt-12">
-            <p className="text-xs text-red-500 font-bold animate-pulse flex items-center justify-center gap-2">
-              ⚠️ LOWER YOUR VOLUME — MUSIC IS PLAYING!
+      <!-- ==================== HOME VIEW ==================== -->
+      <div id="view-home" class="hidden-view flex-col items-center justify-center h-full w-full relative z-10 p-6">
+        <div class="text-center space-y-8 animate-float">
+          <div class="space-y-2">
+            <p class="text-theme-muted tracking-[0.5em] text-sm font-bold uppercase">Welcome to</p>
+            <h1 class="text-6xl md:text-9xl font-retro text-theme-text drop-shadow-glow">
+              HR
+            </h1>
+            <p class="text-theme-muted font-sans text-lg md:text-xl tracking-widest border-t border-b border-theme-text/10 py-2 mt-4 inline-block">
+              HISTORY REVISIONS 2!
             </p>
           </div>
-        </div>
-      </div>
-    );
-  }
 
-  return (
-    <div className={`flex h-screen bg-gradient-to-br ${THEMES[theme]} text-white transition-all duration-1000`}>
-      <aside className="w-64 border-r border-white/10 flex flex-col bg-black/40 backdrop-blur-md">
-        <div className="p-6 border-b border-white/10">
-          <h2 className="text-2xl font-black italic tracking-tighter">HR</h2>
-          <p className="text-[10px] text-neutral-500 font-mono uppercase">History Revisions</p>
-        </div>
-
-        <nav className="flex-1 p-4 space-y-6 overflow-y-auto custom-scrollbar">
-          <div>
-            <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3 px-2">Discover</p>
-            <SidebarItem active={activeCategory === 'All Games'} icon={<LayoutGrid size={18} />} label="All Games" onClick={() => setActiveCategory('All Games')} />
-            <SidebarItem active={activeCategory === 'Extra'} icon={<Zap size={18} />} label="Extra" onClick={() => setActiveCategory('Extra')} />
-          </div>
-
-          <div>
-            <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3 px-2">Arcade</p>
-            <SidebarItem active={activeCategory === 'Arcade'} icon={<Gamepad2 size={18} />} label="Arcade" onClick={() => setActiveCategory('Arcade')} />
-            <SidebarItem active={activeCategory === 'Action'} icon={<Sword size={18} />} label="Action" onClick={() => setActiveCategory('Action')} />
-            <SidebarItem active={activeCategory === 'Puzzle'} icon={<Puzzle size={18} />} label="Puzzle" onClick={() => setActiveCategory('Puzzle')} />
-            <SidebarItem active={activeCategory === 'Strategy'} icon={<Shield size={18} />} label="Strategy" onClick={() => setActiveCategory('Strategy')} />
-            <SidebarItem active={activeCategory === 'Sports'} icon={<Trophy size={18} />} label="Sports" onClick={() => setActiveCategory('Sports')} />
-            <SidebarItem active={activeCategory === 'Horror'} icon={<Ghost size={18} />} label="Horror" onClick={() => setActiveCategory('Horror')} />
-            <SidebarItem active={activeCategory === 'Racing'} icon={<Zap size={18} />} label="Racing" onClick={() => setActiveCategory('Racing')} />
-          </div>
-
-          <div>
-            <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3 px-2">System</p>
-            <SidebarItem active={activeCategory === 'Settings'} icon={<Settings size={18} />} label="Settings" onClick={() => setActiveCategory('Settings')} />
-          </div>
-        </nav>
-
-        <div className="p-4 border-t border-white/10 bg-black/20">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <div>
-              <p className="text-xs font-bold">HR Status</p>
-              <p className="text-[10px] text-neutral-500">Not Caught by the AYM</p>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <main className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-black/20 backdrop-blur-sm">
-          <div className="flex items-center gap-4 text-[10px] font-medium text-neutral-400">
-             <Info size={14} /> 
-             All Backups and Links In the HR Files
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 text-red-500 rounded-md border border-red-500/20 text-xs font-bold hover:bg-red-500/20 transition-colors">
-              <Music size={14} /> MUSIC
-            </button>
+          <div class="pt-8">
             <button 
-              onClick={handleCloak}
-              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 text-white rounded-md border border-white/10 text-xs font-bold hover:bg-neutral-700 transition-colors"
+              id="enter-btn"
+              class="group relative px-12 py-6 bg-theme-text/5 backdrop-blur-sm border border-theme-text/10 rounded-full overflow-hidden transition-all duration-300 hover:bg-theme-text/10 hover:border-theme-text/30 hover:shadow-glow-lg hover:scale-105 cursor-pointer"
             >
-              <EyeOff size={14} /> CLOAK
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-theme-text/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+              <div class="flex items-center gap-4">
+                <span class="font-bold text-xl text-theme-text tracking-widest">ENTER SYSTEM</span>
+                <div class="bg-theme-text text-theme-bg rounded-full p-1">
+                  <i data-lucide="play" class="w-5 h-5 ml-0.5 fill-current"></i>
+                </div>
+              </div>
             </button>
           </div>
-        </header>
+          <p id="volume-warning" class="hidden mt-5 text-xs font-bold tracking-widest animate-pulse" style="color:#dc2626;">⚠ LOWER YOUR VOLUME — MUSIC IS PLAYING!</p>
+        </div>
+        <div class="absolute bottom-8 text-center text-theme-muted text-xs opacity-50">
+          <p>PEAK NONCHALANCE • V 1.0.0</p>
+        </div>
+      </div>
 
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar relative">
-          {showParticles && <Particles theme={theme} />}
+      <!-- ==================== LIBRARY VIEW ==================== -->
+      <div id="view-library" class="hidden-view flex h-full w-full absolute inset-0">
+        
+        <!-- Mobile Sidebar Overlay -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-theme-bg/80 z-40 md:hidden backdrop-blur-md hidden-view"></div>
 
-          {activeCategory === 'Settings' ? (
-            <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <section>
-                <h1 className="text-4xl font-black mb-2">System Settings</h1>
-                <p className="text-neutral-500 text-sm">Customize your arcade experience.</p>
-              </section>
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed md:relative z-50 h-full w-64 flex flex-col transition-transform duration-300 transform -translate-x-full md:translate-x-0 border-r border-theme-text/5">
+          <div class="absolute inset-0 bg-theme-alt/80 backdrop-blur-xl pointer-events-none"></div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <section className="space-y-6">
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-4 flex items-center gap-2">
-                      Appearance Themes
-                    </h3>
-                    <div className="grid grid-cols-3 gap-2">
-                      {Object.keys(THEMES).map(t => (
-                        <button
-                          key={t}
-                          onClick={() => setTheme(t)}
-                          className={`px-3 py-2 text-[10px] font-bold rounded border transition-all ${
-                            theme === t ? 'bg-white text-black border-white' : 'bg-white/5 border-white/10 hover:border-white/40'
-                          }`}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </section>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="p-6">
+              <h1 class="font-retro text-2xl text-theme-text drop-shadow-[0_0_10px_rgb(var(--theme-accent)/0.3)]">HR</h1>
+              <p class="text-xs text-theme-muted mt-1 tracking-widest uppercase">History Revisions</p>
+            </div>
 
-                <section className="space-y-6">
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-4 flex items-center gap-2">
-                      Cloak Settings
-                    </h3>
-                    <div className="p-4 bg-white/5 rounded-xl border border-white/10 space-y-4">
-                      <div>
-                        <p className="text-xs font-bold mb-2">PANIC BUTTON URL</p>
-                        <div className="flex gap-2">
-                          <input 
-                            type="text" 
-                            value={panicUrl}
-                            onChange={(e) => setPanicUrl(e.target.value)}
-                            className="flex-1 bg-black/40 border border-white/10 rounded px-3 py-2 text-xs focus:border-blue-500 outline-none"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+            <nav class="flex-1 px-4 space-y-2 overflow-y-auto" id="category-nav">
+              <div class="text-xs font-semibold text-theme-muted mb-2 px-4 uppercase tracking-wider">Discover</div>
+              
+              <button data-view="browse" data-cat="All" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 bg-theme-text/10 text-theme-text shadow-glow border border-theme-text/10 translate-x-1">
+                <i data-lucide="layout-grid" class="w-5 h-5"></i> All Games
+              </button>
+
+<button data-view="browse" data-cat="Extra" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="align-justify" class="w-5 h-5"></i> Extra
+              </button>
+
+              
+
+              <button data-view="browse" data-cat="Arcade" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="joystick" class="w-5 h-5"></i> Arcade
+              </button>
+              <button data-view="browse" data-cat="Action" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="swords" class="w-5 h-5"></i> Action
+              </button>
+              <button data-view="browse" data-cat="Puzzle" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="puzzle" class="w-5 h-5"></i> Puzzle
+              </button>
+              <button data-view="browse" data-cat="Strategy" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="monitor-play" class="w-5 h-5"></i> Strategy
+              </button>
+              <button data-view="browse" data-cat="Sports" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-theme-muted hover:bg-theme-text/5 hover:text-theme-text hover:translate-x-1 border border-transparent">
+                <i data-lucide="trophy" class="w-5 h-5"></i> Sports
+              </button>
+ 
+
+              <div class="mt-8 text-xs font-semibold text-theme-muted mb-2 px-4 uppercase tracking-wider">System</div>
+              <button data-view="settings" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-theme-muted hover:bg-theme-text/5 hover:text-theme-text transition-all duration-300 hover:translate-x-1 border border-transparent">
+                <i data-lucide="settings" class="w-5 h-5"></i> Settings
+              </button>
+
+            </nav>
+
+            <div class="p-4 border-t border-theme-text/5">
+              <div class="bg-theme-card/40 p-4 rounded-xl border border-theme-text/5 backdrop-blur-md">
+                <h4 class="text-theme-text font-bold text-sm mb-1">HR's Status</h4>
+                <div class="flex items-center gap-2">
+                  <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-theme-accent"></span>
+                  </span>
+                  <span class="text-xs text-theme-muted">Not Caught by the AYM</span>
+                </div>
               </div>
             </div>
-          ) : (
-            <div className="space-y-8 animate-in fade-in duration-500">
-              <section>
-                <h1 className="text-4xl font-black mb-2">Games Library</h1>
-                <p className="text-neutral-500 text-sm">Explore History Revision's premium collection of unblocked games.</p>
-              </section>
-
-              <div className="relative group max-w-md">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-white transition-colors" size={18} />
-                <input 
-                  type="text"
-                  placeholder="Search games..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-black/40 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-sm focus:border-white/30 focus:bg-black/60 outline-none transition-all"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredGames.length > 0 ? (
-                  filteredGames.map(game => (
-                    <GameCard key={game.id} game={game} onPlay={() => handlePlayGame(game)} />
-                  ))
-                ) : (
-                  <div className="col-span-full py-20 text-center text-neutral-500">
-                    No games found matching "{searchQuery}" in {activeCategory}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      </main>
-
-      <style>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-      `}</style>
-    </div>
-  );
-}
-
-function SidebarItem({ icon, label, active, onClick }) {
-  return (
-    <button 
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all group ${
-        active ? 'bg-white/10 text-white' : 'text-neutral-400 hover:text-white hover:bg-white/5'
-      }`}
-    >
-      <span className={active ? 'text-white' : 'text-neutral-500 group-hover:text-neutral-300'}>
-        {icon}
-      </span>
-      {label}
-    </button>
-  );
-}
-
-function GameCard({ game, onPlay }) {
-  return (
-    <div className="group relative bg-neutral-900 border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all hover:-translate-y-1 shadow-lg flex flex-col h-full">
-      <div className={`h-40 ${game.color} relative overflow-hidden flex items-center justify-center shrink-0`}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <span className="text-4xl font-black opacity-20 group-hover:scale-110 transition-transform">{game.title[0]}</span>
-        
-        <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded text-[8px] font-black tracking-widest text-white uppercase">
-          {game.category}
-        </div>
-        
-        {game.tag && (
-          <div className="absolute top-3 right-3 bg-neutral-100 text-black px-2 py-0.5 rounded text-[8px] font-black tracking-widest uppercase">
-            {game.tag}
           </div>
-        )}
-      </div>
-      
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-bold text-sm mb-4 line-clamp-1">{game.title}</h3>
-        <button 
-          onClick={onPlay}
-          className="mt-auto w-full flex items-center justify-center gap-2 py-2 bg-neutral-800 group-hover:bg-neutral-100 group-hover:text-black rounded-lg text-xs font-black transition-all"
-        >
-          <Zap size={14} className="fill-current" /> PLAY NOW
-        </button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col h-full w-full relative z-10">
+          
+          <!-- Header -->
+          <header class="h-20 flex items-center justify-between px-6 sticky top-0 z-50 pointer-events-none">
+            <div class="absolute inset-0 bg-gradient-to-b from-theme-bg/90 to-transparent pointer-events-auto backdrop-blur-[2px]"></div>
+
+            <div class="flex items-center gap-4 flex-1 pointer-events-auto z-10">
+              <button id="mobile-menu-btn" class="md:hidden p-2 text-theme-muted hover:text-theme-text bg-theme-card/50 backdrop-blur-md rounded-lg border border-theme-text/10 transition-colors">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-4 pointer-events-auto z-10 animate-float-delayed">
+              <button id="music-toggle-btn" class="group flex items-center gap-2 px-3 py-1.5 bg-theme-card/50 hover:bg-theme-text/10 text-theme-muted hover:text-theme-text rounded-lg border border-theme-text/20 backdrop-blur-md transition-all duration-300" title="Toggle Music">
+                <i id="music-icon" data-lucide="volume-2" class="w-4 h-4"></i>
+                <span class="text-xs font-bold hidden sm:inline" id="music-label">MUSIC</span>
+              </button>
+              <button id="panic-btn" class="group flex items-center gap-2 px-3 py-1.5 bg-red-900/20 hover:bg-red-900/40 text-red-400 hover:text-red-200 rounded-lg border border-red-500/20 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_15px_rgba(220,38,38,0.3)]" title="Panic Button">
+                <i data-lucide="eye-off" class="w-4 h-4"></i>
+                <span class="text-xs font-bold hidden sm:inline">CLOAK</span>
+              </button>
+
+              <div class="h-9 w-9 rounded-full bg-gradient-to-b from-theme-card to-theme-bg flex items-center justify-center font-bold text-theme-text text-xs border border-theme-text/20 shadow-glow cursor-pointer hover:scale-110 transition-transform">
+                D
+              </div>
+            </div>
+          </header>
+
+          <!-- Main Scrollable Content -->
+          <main class="flex-1 flex flex-col overflow-y-auto relative p-4 h-full">
+
+            <!-- Global Announcement Banner -->
+            <div id="announcement-banner" class="hidden my-2 max-w-7xl mx-auto w-full px-4 relative z-40 transition-all duration-500">
+              <div class="flex items-center gap-4 bg-theme-accent/10 border border-theme-accent/30 text-theme-accent px-6 py-4 rounded-2xl shadow-[0_0_15px_rgb(var(--theme-accent)/0.2)] backdrop-blur-md">
+                <i data-lucide="megaphone" class="w-6 h-6 animate-pulse"></i>
+                <div class="flex-1 text-sm md:text-base font-semibold tracking-wide" id="announcement-text">
+                  Loading global announcement...
+                </div>
+              </div>
+            </div>
+            
+            <!-- ====== BROWSE VIEW (Search & Grid) ====== -->
+            <div id="browse-container" class="max-w-7xl w-full mx-auto px-4 pb-20 fade-in flex-1">
+              
+              <div class="flex flex-col items-center justify-center py-8 md:py-12 text-center animate-float">
+                <h1 class="text-4xl md:text-6xl font-bold text-theme-text mb-4 drop-shadow-glow font-sans tracking-tight">
+                  Games Library
+                </h1>
+                <p class="text-theme-muted text-sm md:text-base mb-8 max-w-lg">
+                  Explore History Revision's premium collection of unblocked games.
+                </p>
+                
+                <div class="relative w-full max-w-xl group">
+                  <div class="absolute -inset-0.5 bg-theme-accent opacity-20 group-hover:opacity-40 rounded-full blur transition duration-500"></div>
+                  <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-theme-muted w-5 h-5"></i>
+                    <input
+                      id="search-input"
+                      type="text"
+                      autocomplete="off"
+                      placeholder="Search games..."
+                      class="w-full bg-theme-card/90 border border-theme-text/20 rounded-full py-4 pl-12 pr-6 text-theme-text placeholder-theme-muted focus:ring-1 focus:ring-theme-accent focus:border-theme-accent outline-none text-base transition-all backdrop-blur-md shadow-2xl"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Games Grid -->
+              <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+                <!-- Games loaded via JS -->
+              </div>
+            </div>
+
+            <!-- ====== ACTIVE GAME VIEW (Iframe Player) ====== -->
+            <div id="active-game-container" class="hidden-view flex-col h-full max-w-7xl w-full mx-auto px-4 pb-8 fade-in">
+              <div class="flex items-center justify-between py-4 mb-2">
+                <button id="btn-back-library" class="flex items-center gap-2 text-theme-muted hover:text-theme-text bg-theme-text/5 hover:bg-theme-text/10 px-4 py-2 rounded-xl transition-all border border-theme-text/10 hover:border-theme-text/30 backdrop-blur-md font-medium text-sm">
+                  <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Library
+                </button>
+                
+                <h2 id="active-game-title" class="text-theme-text font-bold text-lg md:text-xl drop-shadow-[0_0_10px_rgb(var(--theme-text)/0.2)]">
+                  Game Title
+                </h2>
+
+                <button id="btn-fullscreen" class="flex items-center gap-2 text-theme-muted hover:text-theme-text bg-theme-text/5 hover:bg-theme-text/10 px-4 py-2 rounded-xl transition-all border border-theme-text/10 hover:border-theme-text/30 backdrop-blur-md font-medium text-sm">
+                  <i data-lucide="maximize" class="w-4 h-4"></i> <span class="hidden sm:inline">Fullscreen</span>
+                </button>
+              </div>
+
+              <div class="flex-1 w-full bg-theme-bg rounded-2xl border border-theme-text/10 shadow-glow-lg overflow-hidden relative group">
+                <div class="absolute inset-0 flex flex-col items-center justify-center bg-theme-alt pointer-events-none -z-10">
+                  <i data-lucide="loader-2" class="w-10 h-10 text-theme-accent/50 animate-spin mb-4"></i>
+                  <span class="text-theme-muted font-retro text-xs animate-pulse">BOOTING CARTRIDGE...</span>
+                </div>
+                
+                <iframe 
+                  id="game-iframe" 
+                  src="index.html" 
+                  class="w-full h-full border-none relative z-10 bg-transparent" 
+                  allow="fullscreen; autoplay; keyboard" 
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- ====== SETTINGS VIEW ====== -->
+            <div id="settings-container" class="hidden-view flex-col h-full max-w-5xl w-full mx-auto px-4 pb-20 fade-in">
+              <div class="flex flex-col items-center justify-center py-8 md:py-12 text-center animate-float">
+                <h1 class="text-4xl md:text-5xl font-bold text-theme-text mb-4 drop-shadow-glow font-sans tracking-tight">
+                  System Settings
+                </h1>
+                <p class="text-theme-muted text-sm md:text-base mb-8 max-w-lg">
+                  Customize your arcade experience.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Theme Selection Panel -->
+                <div class="bg-theme-card border border-theme-text/10 rounded-2xl p-6 shadow-glow transition-all">
+                  <h3 class="text-xl font-bold text-theme-text mb-6 flex items-center gap-3 border-b border-theme-text/10 pb-4">
+                    <i data-lucide="palette" class="w-6 h-6 text-theme-accent"></i> Appearance Themes
+                  </h3>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="theme-grid">
+                    <!-- Theme buttons auto-generated by JS -->
+                  </div>
+                </div>
+
+                <!-- Controls & Preferences Panel -->
+                <div class="bg-theme-card border border-theme-text/10 rounded-2xl p-6 shadow-glow flex flex-col gap-8 transition-all">
+                  
+                  <!-- Cloak Link -->
+                  <div>
+                    <h3 class="text-xl font-bold text-theme-text mb-4 flex items-center gap-3 border-b border-theme-text/10 pb-4">
+                      <i data-lucide="shield-alert" class="w-6 h-6 text-red-500"></i> Cloak Settings
+                    </h3>
+                    <label class="block text-theme-muted text-xs font-bold mb-3 uppercase tracking-wider">Panic Button URL</label>
+                    <div class="flex gap-2">
+                      <input id="cloak-input" type="text" class="flex-1 bg-theme-bg border border-theme-text/20 rounded-xl px-4 py-3 text-theme-text text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent transition-all placeholder-theme-muted/50" placeholder="vle.learning.moe.edu.sg" />
+                      <button id="save-cloak-btn" class="bg-theme-accent/20 text-theme-accent hover:bg-theme-accent hover:text-theme-bg border border-theme-accent/30 px-6 py-3 rounded-xl transition-all font-bold text-sm shadow-[0_0_10px_rgb(var(--theme-accent)/0.2)]">Save</button>
+                    </div>
+                  </div>
+
+                  <!-- Effects Preferences -->
+                  <div>
+                    <h3 class="text-xl font-bold text-theme-text mb-4 flex items-center gap-3 border-b border-theme-text/10 pb-4">
+                      <i data-lucide="sparkles" class="w-6 h-6 text-theme-accent"></i> Visual Effects
+                    </h3>
+                    <div class="flex items-center justify-between p-2 rounded-xl hover:bg-theme-text/5 transition-colors">
+                      <div>
+                        <span class="text-theme-text font-bold text-sm block mb-1">Background Particles</span>
+                        <span class="text-theme-muted text-xs block">Toggle the interactive canvas background</span>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="particle-toggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-theme-bg border border-theme-text/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-theme-accent"></div>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+          </main>
+        </div>
       </div>
     </div>
-  );
-}
 
-function Particles({ theme }) {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
-      {Array.from({ length: 20 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 bg-white rounded-full animate-float"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${5 + Math.random() * 10}s`,
-            opacity: Math.random()
-          }}
-        />
-      ))}
-      <style>{`
-        @keyframes float {
-          0% { transform: translateY(0) translateX(0); opacity: 0; }
-          50% { opacity: 0.5; }
-          100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+    <!-- Lobby Music -->
+    <audio id="lobby-audio" loop preload="none" style="display:none"></audio>
+
+    <!-- Application Logic -->
+    <script>
+      lucide.createIcons();
+
+      // ==========================================
+      // OPEN GAME WINDOWS TRACKER
+      // ==========================================
+      let openGameWindows = [];
+
+      function playDing() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1046, ctx.currentTime);
+          osc.frequency.setValueAtTime(1318, ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.4, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 1.2);
+        } catch(e) {}
+      }
+
+      // ==========================================
+      // LOBBY MUSIC LOGIC
+      // ==========================================
+      const TRACKS = [
+        { name: "Let The World Burn", file: "lettheworldburn.mp3" },
+        { name: "Heavenly Jumpstyle",  file: "heavenjump.mp3" },
+        { name: "Tiki Tiki",           file: "tikitiki.mp3" },
+        { name: "Ronaldo Phonk",       file: "nobatido.mp3" },
+        { name: "IBFF",                file: "ibff.mp3" }
+      ];
+
+      const lobbyAudio = document.getElementById('lobby-audio');
+      let musicMuted = true;  // start muted, user clicks to unmute
+      let musicShouldPlay = false;
+      let currentTrackFile = null;
+
+      function updateMusicState(playing, trackFile) {
+        musicShouldPlay = playing;
+        if (trackFile && trackFile !== currentTrackFile) {
+          currentTrackFile = trackFile;
+          lobbyAudio.pause();
+          lobbyAudio.src = trackFile;
+          // If already unmuted, resume on new track immediately
+          if (playing && !musicMuted) {
+            lobbyAudio.play().catch(function() {});
+          }
+        } else if (!playing) {
+          lobbyAudio.pause();
         }
-        .animate-float {
-          animation: float linear infinite;
+        updateMusicButton();
+      }
+      var SVG_VOL_ON  = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+      var SVG_VOL_OFF = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+
+      function updateMusicButton() {
+        var iconWrap = document.getElementById('music-icon');
+        var label = document.getElementById('music-label');
+        var btn = document.getElementById('music-toggle-btn');
+        if (iconWrap) iconWrap.innerHTML = musicMuted ? SVG_VOL_OFF : SVG_VOL_ON;
+        if (label) label.textContent = musicMuted ? 'MUTED' : 'MUSIC';
+        if (btn) {
+          if (!musicMuted) {
+            btn.classList.add('text-theme-accent', 'border-theme-accent/30');
+            btn.classList.remove('text-theme-muted', 'border-theme-text/20');
+          } else {
+            btn.classList.remove('text-theme-accent', 'border-theme-accent/30');
+            btn.classList.add('text-theme-muted', 'border-theme-text/20');
+          }
         }
+      }
+
+      document.getElementById('music-toggle-btn').addEventListener('click', function() {
+        musicMuted = !musicMuted;
+        if (musicMuted) {
+          lobbyAudio.pause();
+        } else {
+          // User clicked unmute — play if admin has music on
+          if (musicShouldPlay && currentTrackFile) {
+            lobbyAudio.src = currentTrackFile;
+            lobbyAudio.play().catch(function() {});
+          }
+        }
+        updateMusicButton();
+      });
+
+      // ==========================================
+      // SYSTEM SETTINGS & PERSISTENCE LOGIC
+      // ==========================================
+      let appSettings = {
+        theme: 'default',
+        cloakUrl: 'https://vle.learning.moe.edu.sg',
+        particles: true
+      };
+
+      const themesList = ['default', 'cyberpunk', 'matrix', 'crimson', 'abyss', 'vaporwave', 'gold'];
+
+      // Load Settings from LocalStorage
+      const savedSettings = localStorage.getItem('dray_settings');
+      if (savedSettings) {
+        const parsed = JSON.parse(savedSettings);
+        // Migrate old classroom.google.com default to new VLE default
+        if (parsed.cloakUrl === 'https://classroom.google.com') {
+          parsed.cloakUrl = 'https://vle.learning.moe.edu.sg';
+        }
+        appSettings = { ...appSettings, ...parsed };
+      }
+
+      function applySettings() {
+        document.body.setAttribute('data-theme', appSettings.theme);
+        document.getElementById('cloak-input').value = appSettings.cloakUrl;
+        document.getElementById('particle-toggle').checked = appSettings.particles;
+      }
+      
+      function saveSettings() {
+        localStorage.setItem('dray_settings', JSON.stringify(appSettings));
+        applySettings();
+      }
+
+      applySettings();
+
+      // ==========================================
+      // LAUNCHER / CLOAK DETECTION
+      // ==========================================
+      const viewLauncher = document.getElementById('view-launcher');
+      const viewHome = document.getElementById('view-home');
+
+      const isCloaked = window.location.href === 'about:blank' || window.location.href === 'about:srcdoc' || localStorage.getItem('hr_safer_alt_used') === '1';
+      // Clear the flag after reading it so it only skips once per SAFER ALT click
+      localStorage.removeItem('hr_safer_alt_used');
+
+      if (isCloaked) {
+        viewLauncher.classList.add('hidden-view');
+        viewHome.classList.remove('hidden-view');
+        viewHome.classList.add('flex');
+      } else {
+        lobbyAudio.pause();
+        lobbyAudio.src = '';
+        currentTrackFile = null;
+        musicShouldPlay = false;
+        viewLauncher.classList.remove('hidden-view');
+        viewLauncher.classList.add('flex');
+      }
+
+      document.getElementById('btn-launch-cloaked').addEventListener('click', () => {
+        localStorage.setItem('hr_safer_alt_used', '1');
+        let newWin = window.open('about:blank', '_blank');
+        if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
+          alert("Popup blocked! Please allow popups for this site, or just choose 'Play Here'.");
+        } else {
+          newWin.document.open();
+          newWin.document.write(`<!DOCTYPE html>` + document.documentElement.outerHTML);
+          newWin.document.close();
+          window.location.replace(appSettings.cloakUrl || 'https://vle.learning.moe.edu.sg');
+        }
+      });
+
+      document.getElementById('btn-play-here').addEventListener('click', () => {
+        viewLauncher.classList.add('hidden-view');
+        viewLauncher.classList.remove('flex');
+        viewHome.classList.remove('hidden-view');
+        viewHome.classList.add('flex');
+      });
+
+      // ==========================================
+      // UI HANDLERS (Themes, Links, Panic)
+      // ==========================================
+      const themeGrid = document.getElementById('theme-grid');
+      themeGrid.innerHTML = '';
+      themesList.forEach(t => {
+        const btn = document.createElement('button');
+        const isActive = t === appSettings.theme;
+        btn.className = `px-4 py-3 rounded-xl border transition-all duration-300 font-bold text-xs uppercase tracking-wider 
+          ${isActive ? 'bg-theme-accent text-theme-bg border-theme-accent shadow-glow' : 'bg-theme-bg text-theme-text border-theme-text/10 hover:border-theme-accent/50 hover:text-theme-accent'}`;
+        btn.textContent = t;
+        
+        btn.onclick = () => {
+          appSettings.theme = t;
+          saveSettings();
+          
+          Array.from(themeGrid.children).forEach(child => {
+            const childTheme = child.textContent.toLowerCase();
+            if (childTheme === t) {
+              child.className = `px-4 py-3 rounded-xl border transition-all duration-300 font-bold text-xs uppercase tracking-wider bg-theme-accent text-theme-bg border-theme-accent shadow-glow`;
+            } else {
+              child.className = `px-4 py-3 rounded-xl border transition-all duration-300 font-bold text-xs uppercase tracking-wider bg-theme-bg text-theme-text border-theme-text/10 hover:border-theme-accent/50 hover:text-theme-accent`;
+            }
+          });
+        };
+        themeGrid.appendChild(btn);
+      });
+
+      document.getElementById('save-cloak-btn').addEventListener('click', (e) => {
+        const inputVal = document.getElementById('cloak-input').value.trim();
+        appSettings.cloakUrl = inputVal || 'https://vle.learning.moe.edu.sg';
+        
+        if(!appSettings.cloakUrl.startsWith('http')) {
+            appSettings.cloakUrl = 'https://' + appSettings.cloakUrl;
+            document.getElementById('cloak-input').value = appSettings.cloakUrl;
+        }
+
+        saveSettings();
+        
+        const btn = e.target;
+        const originalText = btn.textContent;
+        btn.textContent = "Saved!";
+        btn.classList.add("bg-green-500", "text-black", "border-green-500");
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove("bg-green-500", "text-black", "border-green-500");
+        }, 1500);
+      });
+
+      document.getElementById('particle-toggle').addEventListener('change', (e) => {
+        appSettings.particles = e.target.checked;
+        saveSettings();
+        if (!appSettings.particles) {
+          const canvas = document.getElementById('bg-canvas');
+          if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+      });
+
+      document.getElementById('panic-btn').addEventListener('click', () => {
+        window.location.replace(appSettings.cloakUrl);
+      });
+
+
+      // ==========================================
+      // ADMIN & FIREBASE LOGIC
+      // ==========================================
+      
+      // -- Global Listeners (For ALL users) --
+      if (database) {
+        const announcementBanner = document.getElementById('announcement-banner');
+        const announcementText = document.getElementById('announcement-text');
+        
+        // Listen for Announcements
+        let firstAnnouncementLoad = true;
+        let lastAnnouncementText = null;
+        database.ref('announcement').on('value', (snapshot) => {
+          const data = snapshot.val();
+          const newText = (data && data.text && data.text.trim() !== "") ? data.text : null;
+
+          if (newText) {
+            announcementText.textContent = newText;
+            announcementBanner.classList.remove('hidden');
+          } else {
+            announcementBanner.classList.add('hidden');
+          }
+
+          // Only trigger ding + in-game popup for actual NEW announcements
+          if (!firstAnnouncementLoad && newText && newText !== lastAnnouncementText) {
+            playDing();
+            // Notify all open game windows
+            openGameWindows = openGameWindows.filter(w => w && !w.closed);
+            openGameWindows.forEach(w => {
+              try { w.postMessage({ type: 'HR_NEW_ANNOUNCEMENT', text: lastAnnouncementText || '' }, '*'); } catch(e) {}
+            });
+          }
+
+          firstAnnouncementLoad = false;
+          lastAnnouncementText = newText;
+        });
+
+        // Listen for Music
+        var _lastMusicPlaying = null;
+        var _lastMusicTrack = null;
+        database.ref('siteSettings/music').on('value', function(snapshot) {
+          var data = snapshot.val();
+          if (!data) return;
+          var playing = data.playing === true;
+          var track = data.track || null;
+          if (playing === _lastMusicPlaying && track === _lastMusicTrack) return;
+          _lastMusicPlaying = playing;
+          _lastMusicTrack = track;
+          updateMusicState(playing, track);
+          // Show/hide volume warning on home screen
+          var warn = document.getElementById('volume-warning');
+          if (warn) warn.classList.toggle('hidden', !playing);
+        });
+
+        // Listen for Rainbow Mode
+        database.ref('siteSettings/rainbowMode').on('value', (snapshot) => {
+            const isRainbow = snapshot.val();
+            
+            // TARGET HTML TO NUKE EVERYTHING
+            const root = document.documentElement; 
+            
+            if (isRainbow === true) {
+                root.classList.add('rainbow-active');
+            } else {
+                root.classList.remove('rainbow-active');
+            }
+            
+
+        });
+      }
+
+
+
+      // ==========================================
+      // GAMES DATA
+      // Format: ["Title", "URL", "ImageURL", "Category"]
+      // ==========================================
+      var _GAMES = [
+["Poly Track F1🏎️(Now Working!)","https://polytrack-4apk.vercel.app","bing_images/h.webp","Racing"],
+["Whatsapp Channel","jc.html","bing_images/image_800.webp","Extra"],
+["Link Unblocker🤐(NEW!)","https://nine5a3e40eb5258097adf.onrender.com/a89ahwo/i2ueqwd?k=ASMCU","mentirao.jpg","Shh"],
+["G*mes Form","https://docs.google.com/forms/d/e/1FAIpQLScs7kPgU-yqYJYvSddy7jKzq_WOMmNA_Kk0WDWMn71QNBCEPg/viewform?usp=header","bing_images/image_159.webp","Extra"],
+["Polytrack Form","https://docs.google.com/forms/d/e/1FAIpQLSfCWtuxJMIC4VYdFDwTLNpQjMolgaQnV0QXnJHm52tL85xsgg/viewform?usp=header","bing_images/image_159.webp|blue","Extra"],
+["Terms & Conditions","tc.html","bing_images/image_505.png","Extra"],
+["Credits","credits.html","bing_images/image_199.webp","Extra"],
+["Polytrack Records","polytrack.html","bing_images/image_19.webp","Extra"],
+["ORIGINAL SITE","ogsite.html","bing_images/image_218.webp","Extra"],
+ ["More PT Tracks","https://polytrack-hhzq.vercel.app","cfcf.png","Modded"],
+ ["Piano Tiles 1","piano-tiles.html","bing_images/image_1000.webp","Arcade"],
+["Monkey Mart","monkeymart.html","mm.png","Tycoon"],
+["Balatro","gfnd.html","cdbl.png","Strategy"],
+ ["Slope Rider 3D","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_b60f94ad0f84315fb5e8927dff258b68.html","bing_images/image_109.webp","Sports"],
+        ["Super Liquid Soccer","https://hrslsoccer.vercel.app","img-super-liquid-soccer-new.jpg","Sports"],
+        ["Stickman Duel","https://stickman-duela.vercel.app","img-stickman-duel-new.jpg","Action"],
+        ["Portal Defenders TD","portal-defenders-td.html","img-they-are-coming.jpg","Strategy"],
+        ["Level Devil","level-devil.html","img-level-devil.jpg","Arcade"],
+        ["Flappy Bird","flappy-bird.html","img-flappy-bird.jpg","Arcade"],
+        ["Subway Surfers","subway-surfers.html","img-subway-surfers.jpg","Arcade"],
+        ["Gambling Sim","gambling-sim.html","img-scratch.jpg","Simulation"],
+        ["They Are Coming","they-are-coming.html","img-portal-defenders.jpg","Action"],
+        ["Tunnel Rush","tunnel-rush.html","tunnel-rush.png","Arcade"],
+        ["Tag","tag.html","tag.png","Multiplayer"],
+        ["Five nights at Epstein's", "https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d7b5efdff8c12e973faa40020d911b3e.html", "https://cdn.jsdelivr.net/gh/gn-math/covers@main/710.png", "Horror"],
+["FNAF 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_1c2a06ce7c3dd0d7571a7c8cdf2159bd.html","https://th.bing.com/th/id/OIP.lLRwPUQifXTTaAywBgNtUQHaEK?w=333&h=187&c=7&r=0&o=5&pid=1.7","Horror"],
+                ["Baldi's Basics","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_b49415c7838d5272bed3689dc5bf5f3a.html","bing_images/image_10.webp","Horror"],
+        ["Andy’s apple farm","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_55cf857ecf0f24c03931818ca5d2c64f.html","bing_images/image_11.webp","Horror"],
+        ["Backrooms","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_b0fb0d44b318cce53bb222223053649f.html","bing_images/image_12.webp","Horror"],
+        ["Granny","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_dbdbefeff7b047946f8f53bd2fbe3eb9.html","bing_images/image_13.webp","Horror"],
+        ["Granny 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c3f8a587f8831eefa2cca620e772a2e0.html","bing_images/image_14.webp","Horror"],
+        ["Granny 3","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_416af790ca7dea29c087069dcaa5bc7f.html","bing_images/image_15.webp","Horror"],
+        ["Drift hunters","https://sgs-game-cdn.pages.dev/Projects/Drift%20Hunters/main","bing_images/image_16.webp","Racing"],
+        ["Crazy Cars","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_50dc552a289d3aa0e4273604c7c1ddd9.html","bing_images/image_17.webp","Racing"],
+        ["Bergen Truck","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ce3a36b65478665b459587784cd150e6.html","bing_images/image_18.webp","Racing"],
+        ["Poly Track","https://polytrack-0-5-2-updat.vercel.app","bing_images/image_19.webp","Racing"],
+        ["Poly Track Beta","https://polytrack-beta-0-6-0.vercel.app","bing_images/image_19.webp","Racing"],
+["Poly Track F1🏎️","https://polytrack-4apk.vercel.app","bing_images/h.webp","Racing"],        ["Tanuki Sunset","https://ell-limone.vercel.app","img-tanuki-sunset-new.jpg","Racing"],
+        ["Escape Road","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_09a778fbb9300fcac375c605e1a95c41.html","img-escape-road.jpg","Racing"],
+["Escape Road 2🔥","er2.html","er2.png","Racing"],
+
+        ["Highway Racer","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c48f27399cfdf99416982c7763cdb81d.html","bing_images/image_21.webp","Racing"],
+        ["Blade Ball","bb.html","bing_images/image_22.webp","Arcade"],
+        ["Minecraft 1.12","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_2dd5de6cb688fee72be5cbab95e095a0.html","bing_images/image_23.webp","Sandbox"],
+               ["Super Mario 64","https://sgs-game-cdn.pages.dev/Projects/Super%20Mario%2064/main","bing_images/image_25.webp","Strategy"],
+        ["Lego Batman","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_1e99189d031d39e45df4ada28cf4ca6d.html","bing_images/image_26.webp","Action"],
+        ["Solar Smash","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_a34d7d9529cdd13d72af213c4c67ca48.html","bing_images/image_27.webp","Simulation"],
+        ["Sandbox city","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_55aed20d83be262f0dec95a1c62c63cb.html","bing_images/image_28.webp","Sandbox"],
+                ["Build now!","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_6b503f34c6f64a45a6fe9937d15f4fc0.html","bing_images/image_30.webp","Simulation"],
+        ["Super hot","https://sgs-game-cdn.pages.dev/Projects/SuperHot/main","bing_images/image_31.webp","Action"],
+        ["Karlson milk man","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_aec4e8345cfb319cf7874a359465987b.html","bing_images/image_32.webp","Action"],
+        ["Ultra kill","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_919f5c53443b660a80d7c9d667fd1255.html","bing_images/image_33.webp","Action"],
+        ["Knights Arena","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_6bfbd4a603b41e65bf40dc506359f672.html","bing_images/image_34.webp","Action"],
+        ["HalfLife","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_7fbcdf98e9bfce2bbdd9fc4800787797.html","bing_images/image_35.webp","Action"],
+        ["People playground","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_663dc2aec59746cedf7fdf39a8c7510d.html","bing_images/image_36.webp","Simulation"],
+        ["Deltarune","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d3d08fe859c5e016e4a2710b5e930a07.html","bing_images/image_37.webp","RPG"],
+        ["Squid Playground","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_1833ff0bb4ad28de308adb9e019568d3.html","bing_images/image_38.webp","Simulation"],
+        ["Hollow knight","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_baadd1fca64488e9676b1cb222b162fc.html","bing_images/image_39.webp","Action"],
+        ["Raft","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d324c3d9aa09a662a30049a32f97a833.html","bing_images/image_40.webp","Survival"],
+        ["Only up","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_4fa7e24a1a30d8d8390701c57ece7d60.html","bing_images/image_41.webp","Arcade"],
+        ["Chrome dino","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_908edc67fbe3f9f03b98e4ec322cbfa1.html","bing_images/image_42.webp","Arcade"],
+        ["Getting over it","https://69150697-b785-4bcb-9ae1-0524e0fabe96.filesusr.com/html/308cff_c955f8860628e460512c60e251f69a9f.html","bing_images/image_43.webp","Arcade"],
+        ["Friday night Funkin","fnf.html","bing_images/image_44.webp","Rhythm"],
+               ["A dance of fire and ice","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0ab3ba6a32e352ad2d4bb87cde54141f.html","bing_images/image_46.webp","Rhythm"],
+        ["A small world cup","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_f3940e0d70b5293bdbdaffd107ec6fde.html","bing_images/image_47.webp","Sports"],
+        ["Angry birds","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_55dc779bc57b33541bed4205fbfd4f72.html","bing_images/image_48.webp","Arcade"],
+        ["Bad parenting","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0ed710982a10cd56b474252d5017db7f.html","bing_images/image_49.webp","Horror"],
+        ["Baseball bros","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c4981e24b86c333d69732a8cabaa0458.html","bing_images/image_50.webp","Sports"],
+        ["basket battle","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_7767f2c4954d55b5f267f73d2664d082.html","bing_images/image_51.webp","Sports"],
+        ["basket random","https://basket-random-iota.vercel.app","bing_images/image_52.webp","Sports"],
+        ["basket ball stars","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5a0afb889ab52bc8762338ea8f77ba89.html","bing_images/image_53.webp","Sports"],
+        ["Bitlife","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_fdd3accf5996a8beb9d8b9f2164c708b.html","bing_images/image_54.webp","Simulation"],
+        ["Block blast","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0c12aead615e2d2a38a55fc977400a03.html","bing_images/image_55.webp","Puzzle"],
+        ["Blocky Demolition Derby","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_33282609c09e64f1724e430bf498fec5.html","bing_images/image_56.webp","Racing"],
+        ["Blocky Snakes","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_4306b08f07af81e007a7077601535229.html","bing_images/image_57.webp","Arcade"],
+        ["Blood tournament","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_cc7742378ad220d5391cde3831b761fa.html","bing_images/image_58.webp","Action"],
+        ["Bounce masters","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_9699bb65c1a49b773d5dfed3fbf4e3d6.html","bing_images/image_59.webp","Arcade"],
+        ["boxing random","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d6841a70a29c0330d95bbf5327bf9109.html","bing_images/image_60.webp","Sports"],
+        ["choppy orc","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_8013c5601d2cc272c73df25da1cfc366.html","bing_images/image_61.webp","Action"],
+        ["cluster truck","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5ba3cc4a3754b6501c3008fccc0daf22.html","img-cluster-truck.jpg","Action"],
+        ["crazy mototrcycle","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_2332d8760ae403bed4904bc512e48864.html","bing_images/image_63.webp","Racing"],
+        ["crazy chicken 3d","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_9bad45c3b00e9ebf5fd27777c7871a92.html","bing_images/image_64.webp","Arcade"],
+        ["cookie clicker","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_6191eb8aa21aac260a6391f342a9de56.html","bing_images/image_65.webp","Clicker"],
+        ["Crossy Road","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_094855848ee2a5b8aae9f3ed9fa2dd4a.html","bing_images/image_66.webp","Arcade"],
+        ["deepest sword","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_f096c1116d1c8003e5e3e176bd75df45.html","bing_images/image_67.webp","Action"],
+        ["dodge miner","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_746d66beb4e418ff01d10724f3988560.html","bing_images/image_68.webp","Arcade"],
+        ["dodge miner 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_a7b6d94fdd1ef26b09a78491241f7e45.html","bing_images/image_69.webp","Arcade"],
+        ["drive mad","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_3db30de8a12682cd714f5f25ebc86990.html","bing_images/image_70.webp","Racing"],
+        ["duck life space","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c39e72ad05032b2bd9bbb445569fd72a.html","bing_images/image_71.webp","Simulation"],
+        ["eggy car","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_46b198270f823eb5d711532ce549edd0.html","bing_images/image_72.webp","Racing"],
+        ["fnaf 3","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_b63025a4ec74885360a880f17f7a12f7.html","bing_images/image_73.webp","Horror"],
+        ["fnaf 4","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_773f8fee0a014579017ec6bb39a5297a.html","bing_images/image_75.webp","Horror"],
+        ["fnaf world","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_773f8fee0a014579017ec6bb39a5297a.html","bing_images/image_75.webp","RPG"],
+        ["football bros","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_fe1a67ba6321b7b837d48f367c596aec.html","bing_images/image_76.webp","Sports"],
+        ["funny shooter 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ff36e20ff38d36e1b5e385547fefdaad.html","bing_images/image_77.webp","Action"],
+        ["fruit ninja","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_823efca9c84f72061575a264c1f0e781.html","bing_images/image_78.webp","Arcade"],
+        ["geometry dash lite","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_9b5b85b6e8d4f34bfae93201b7bcb01b.html","bing_images/image_79.webp","Arcade"],
+        ["getaway shooter","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0ff83caf3863d71b2b8fa735c45bc393.html","bing_images/image_80.webp","Action"],
+        ["gladi hoppers","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0ef6095ecd7eedb7d3e5db42c71689bc.html","bing_images/image_81.webp","Action"],
+        ["gunspin","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_b7b5981347397428a09798e9fa691438.html","bing_images/image_82.webp","Action"],
+        ["gym stack","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_795292ec79b1082da7676e647047d306.html","bing_images/image_83.webp","Simulation"],
+        ["house of hazards","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_e56284247a100fe1d9f50219e9a9d9c7.html","bing_images/image_84.webp","Arcade"],
+        ["human expenditure program","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c469d77b38e41e440fc597bdf74dd27a.html","bing_images/image_85.webp","Simulation"],
+        ["hover racer drive","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_2b9e49be5764e23c768fcb218f2a944c.html","bing_images/image_86.webp","Racing"],
+        ["Ink g*me","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_325e848a4f104118997dfd7fbe018213.html","bing_images/image_87.webp","Puzzle"],
+        ["infinite craft","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_cba2574ec494b666376991e5cabad7f5.html","bing_images/image_88.webp","Puzzle"],
+        ["kour.io","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0a15d30ec87206c4f68aae82410af213.html","bing_images/image_89.webp","Action"],
+        ["Nazi zombies","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ed3b5224294996674e47f2275cf58544.html","bing_images/image_90.webp","Action"],
+        ["One night as Freddy's","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5963d8ea32096a62cd5b2d980d2d0682.html","bing_images/image_91.webp","Horror"],
+        ["Osu","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c1dd9f4bf1b1df89844415fc91b36eb8.html","bing_images/image_92.webp","Rhythm"],
+        ["parking fury","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_464a0aa713c55cdce05a5927633d666b.html","bing_images/image_93.webp","Puzzle"],
+        ["Portal 2d","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d5ab1ac2fd31a9a274811c3fcfd2b35f.html","bing_images/image_94.webp","Puzzle"],
+        ["ragdoll archers","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5988d2ef4447d0c02ed69d69bd4fef43.html","img-ragdoll-archers.jpg","Action"],
+        ["retro bowl","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_28d5a02fc7a1dc5ec931e6d586ddeca4.html","bing_images/image_96.webp","Sports"],
+        ["rooftop snipers","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_72756475c31f965d6437a27c6bd33440.html","bing_images/image_98.webp","Action"],
+        ["rooftop snipers 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_4468b2bc67ac38451402c0aa33bc6ea0.html","bing_images/image_99.webp","Action"],
+        ["slither.io","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_4606a41d970c4bbd3fedacb4af7955bd.html","img-slither.jpg","Arcade"],
+        ["slow roads","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_7ff9e5092f4da4b22d39083740e50606.html","bing_images/image_101.webp","Racing"],
+        ["snowball.io","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d38daba27415d322f88a12beae1ef159.html","bing_images/image_102.webp","Arcade"],
+        ["soccer bros","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_740b83abb2cd2ef4ac85793780809423.html","bing_images/image_103.webp","Sports"],
+        ["soccer random","https://soccer-random-omega.vercel.app","bing_images/image_104.webp","Sports"],
+        ["temple run 2d","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_76a5f1e84e97831ffd8e47b9f7c5c6c7.html","bing_images/image_105.webp","Arcade"],
+        ["tomb of mask","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_f25e3738351adcfec44123857e8e1049.html","bing_images/image_106.webp","Arcade"],
+        ["Ultimate car driving simulator","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_230b92c217825bf22807e5bae90215fd.html","bing_images/image_107.webp","Racing"],
+        ["slope plus","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_d10282c55ba16374431f3ae11885f772.html","bing_images/image_108.webp","Arcade"],
+       
+        ["sonic.exe","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_05c99092e1d9bc44a6ea93b516371b06.html","bing_images/image_110.webp","Horror"],
+        ["space bar clicker","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_023860389f27171745d022803c4c8a6e.html","bing_images/image_111.webp","Clicker"],
+        ["space waves","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5735650bd72214bf962da9b734073e73.html","bing_images/image_112.webp","Arcade"],
+        ["survival race v2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5f5ea2c62ccfacbad02ffdbc03e0a3b8.html","img-survival-race.png","Racing"],
+        ["survival race v1","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_1255378d4a6c1f98af13d6307dee47bc.html","img-survival-race.png","Racing"],
+        ["10 minutes till dawn","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_a2dd5803a99016a757ce40a00102dffd.html","bing_images/image_115.webp","Action"],
+        ["1v1.lol","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_86ec7f8b730df71e730127f41f76e9dd.html","bing_images/image_116.webp","Action"],
+        ["99 nights in the forest","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_1c8651b0d1dafe927c3868200b711565.html","bing_images/image_117.webp","Horror"],
+        ["a dark room","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ae7c59d700af7f1431f071de41e19951.html","bing_images/image_118.webp","RPG"],
+        ["a day in the office","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_37a700eda28c55912ed10eb5db0c72b4.html","bing_images/image_119.webp","Simulation"],
+        ["ahoy survival","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_81beb819db847ed44d6ae9fa160d893d.html","bing_images/image_120.webp","Survival"],
+        ["ages of conflict","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_453dbec432b54f2bb0bf0b10407f9df2.html","bing_images/image_121.webp","Strategy"],
+        ["amazing strange rope police","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_6a9c4f4cd238256c4888de3c7322c032.html","bing_images/image_122.webp","Action"],
+        ["among us fan version","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_345405298de73cebfc138adc3737fd2d.html","bing_images/image_123.webp","Arcade"],
+        ["babel tower","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_18397f960d16bf07776777fa0de4d06d.html","bing_images/image_124.webp","Clicker"],
+        ["baby Chicco adventures","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_3548274d8ea29cc51e6f27c250a8ee5f.html","bing_images/image_125.webp","Arcade"],
+        ["baby sniper in Vietnam","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_e189e72667ac6e5f629a5162c34eef3d.html","bing_images/image_126.webp","Action"],
+        ["bacon may die","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0404564ccb48dc84c3ca133152b99b0b.html","bing_images/image_127.webp","Action"],
+        ["bad bodyguards","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_7cca25aad01ab4c5a0d2996a1749d4cd.html","bing_images/image_128.webp","Action"],
+        ["bad Monday simulator","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_c6cbff115af23730347234b000bf10e6.html","bing_images/image_129.webp","Simulation"],
+        ["bad time simulator","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_3e722c43f5df45f40886bcf783d04a6b.html","bing_images/image_130.webp","RPG"],
+        ["bank robber 2","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_8d0f426860166d8831b517c22fdfaea7.html","bing_images/image_131.webp","Action"],
+                ["car drawing","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5d2333369501409d61572514e3dca7a6.html","bing_images/image_133.webp","Puzzle"],
+        ["cheese chompers 3D","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_89a5f64f44970d6b23c6c327bb5e588b.html","bing_images/image_134.webp","Arcade"],
+        ["clash of Vikings","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_bce33fe3e3a92651bd435c3a2b537b3d.html","bing_images/image_135.webp","Strategy"],
+   ["fireboy and watergirl","fbawg.html","bing_images/download74.jpg","Strategy"],
+        ["Doodle Jump","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_26bc14dfcc278ba889af4aef205c9b59.html","bing_images/image_136.webp","Arcade"],
+        ["half life doom","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_0203bb115f63a5538bcf409d7e32f02e.html","bing_images/image_137.webp","Action"],
+        ["Draw climber","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_4ab068ddcc157ff58600b8ca9878a482.html","bing_images/image_138.webp","Puzzle"],
+        ["dreader","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_155344af01d6542573a85dd75aa2cd53.html","bing_images/image_139.webp","Horror"],
+        ["drive wild","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ceff85e78f3455cf796fc4917fd0935b.html","bing_images/image_140.webp","Racing"],
+        ["SandBoxels","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_ad07b8fa67cccca584d2834177df8c95.html","bing_images/image_141.webp","Sandbox"],
+               ["Side Effects","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_26073acb012073f793464381ff37379b.html","bing_images/image_143.webp","Simulation"],
+        ["Station 141","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5c218f501e6c67f5652d7baf5812b998.html","bing_images/image_144.webp","Horror"],
+        ["Gta vice city","","bing_images/image_145.webp","Action"],
+        ["Gorilla tag","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_a6c51ff15e1a14ba87f573e556fbf374.html","bing_images/image_146.webp","Action"],
+        ["Pizza tower","https://educateandlearnallabout.sciencevictory.com/gamefile/Pizza%20Tower.html","bing_images/image_147.webp","Action"],
+        ["customer support","https://educateandlearnallabout.sciencevictory.com/games/CustomerSupport/index.html","https://img.itch.zone/aW1nLzIyNDA0OTE0LmpwZw==/original/9EfAmY.jpg","Simulation"],
+               ["Baldi basics","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_71b56e8afb366e16b35005ecf06804df.html","bing_images/image_149.webp","Horror"],
+              ["Crazy plane landing","https://cookjessie383-wixsite-com.filesusr.com/html/308cff_5693c6ca5a5a524934f89e61e2a2441e.html","bing_images/image_151.webp","Simulation"]
+
+      ];
+
+      // --- Rendering & Filtering Logic ---
+      const gamesGrid = document.getElementById('games-grid');
+      const searchInput = document.getElementById('search-input');
+      
+      const browseContainer = document.getElementById('browse-container');
+      const activeGameContainer = document.getElementById('active-game-container');
+      const settingsContainer = document.getElementById('settings-container');
+      
+      const gameIframe = document.getElementById('game-iframe');
+      const activeGameTitle = document.getElementById('active-game-title');
+      
+      let currentCategory = 'All';
+
+      function openGame(title, url) {
+        const newWin = window.open('about:blank', '_blank');
+        if (!newWin || newWin.closed) {
+          alert("Popup blocked! Please allow popups for this site.");
+          return;
+        }
+        newWin.document.open();
+        newWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}</title><style>*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:#000}iframe{position:fixed;top:0;left:0;width:100%;height:100%;border:none}#panicBtn{position:fixed;top:80px;left:20px;z-index:9999;padding:20px 40px;background-color:#0066cc;color:#ffeb3b;text-decoration:none;font-weight:bold;font-size:9px;border-radius:8px;font-family:Arial,sans-serif;box-shadow:0 4px 10px rgba(0,0,0,0.3);display:inline-block}#panicBtn:hover{background-color:#004c99}#hr-notify{display:none;position:fixed;top:20px;left:20px;z-index:99999;background:linear-gradient(90deg,#ff2d78,#ff8c00);color:#fff;font-family:Arial,sans-serif;font-size:11px;font-weight:bold;padding:8px 16px;border-radius:6px;box-shadow:0 0 20px rgba(255,45,120,0.6);letter-spacing:0.05em;cursor:pointer;animation:hrPulse 0.5s ease infinite alternate;}@keyframes hrPulse{from{box-shadow:0 0 10px rgba(255,45,120,0.4);}to{box-shadow:0 0 25px rgba(255,45,120,0.9);}}#hr-modal{display:none;position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;}#hr-modal-box{background:#111;border:1px solid #ff2d78;border-radius:12px;padding:24px;max-width:360px;width:90%;color:#fff;font-family:Arial,sans-serif;position:relative;}#hr-modal-title{font-size:13px;font-weight:bold;color:#ff8c00;margin-bottom:12px;letter-spacing:0.05em;}#hr-modal-text{font-size:13px;line-height:1.6;color:#eee;}#hr-modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;line-height:1;}</style></head><body><div id="hr-notify">📢 NEW ANNOUNCEMENT!</div><div id="hr-modal" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;"><div style="background:#111;border:1px solid #ff2d78;border-radius:12px;padding:24px;max-width:360px;width:90%;color:#fff;font-family:Arial,sans-serif;position:relative;"><button id="hr-modal-close" style="position:absolute;top:10px;right:14px;background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;">✕</button><div style="font-size:12px;font-weight:bold;color:#ff8c00;margin-bottom:10px;">📢 ANNOUNCEMENT</div><div id="hr-modal-text" style="font-size:13px;line-height:1.6;color:#eee;"></div></div></div><a href="https://vle.learning.moe.edu.sg" target="_blank" id="panicBtn">Panic Button</a><iframe id="gf" src="${url}" allowfullscreen allow="fullscreen;autoplay;keyboard" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms allow-pointer-lock"></iframe><script>var skip=["308cff_081f9eeba29467a9d0aa637fd45896f1"];function h(){var f=document.getElementById("gf");if(!f)return;if(skip.some(function(s){return f.src.indexOf(s)>=0}))return;f.style.height=window.innerHeight+"px";}h();window.addEventListener("resize",h);setInterval(h,500);window.addEventListener("message",function(e){if(e.data&&e.data.type==="HR_NEW_ANNOUNCEMENT"){var mt=document.getElementById("hr-modal-text");if(mt)mt.textContent=e.data.text||"";var n=document.getElementById("hr-notify");n.style.display="block";setTimeout(function(){n.style.display="none";},10000);}});document.getElementById("hr-notify").addEventListener("click",function(){var m=document.getElementById("hr-modal");if(m)m.style.display="flex";});document.getElementById("hr-modal-close").addEventListener("click",function(){var m=document.getElementById("hr-modal");if(m)m.style.display="none";});<\/script></body></html>`);
+        newWin.document.close();
+        openGameWindows.push(newWin);
+      }
+
+      function renderGames(gamesToRender) {
+        gamesGrid.innerHTML = ''; 
+        
+        if (gamesToRender.length === 0) {
+          gamesGrid.innerHTML = `
+            <div class="col-span-full pb-20 min-h-[200px] flex items-center justify-center border-2 border-dashed border-theme-text/20 rounded-3xl bg-theme-bg mt-8">
+              <p class="text-theme-muted font-mono text-sm animate-pulse">NO GAMES FOUND...</p>
+            </div>
+          `;
+          return;
+        }
+
+        gamesToRender.forEach(game => {
+          const title = game[0];
+          const url = game[1];
+          const imgRaw = game[2];
+          const imgBlue = imgRaw.endsWith('|blue');
+          const img = imgBlue ? imgRaw.replace('|blue', '') : imgRaw;
+          const imgStyle = imgBlue ? 'style="filter:hue-rotate(200deg) saturate(150%) brightness(0.9)"' : '';
+          const category = game[3];
+
+          const card = document.createElement('div');
+          card.className = "group relative bg-theme-card rounded-2xl overflow-hidden border border-theme-text/5 hover:border-theme-accent transition-all duration-300 hover:-translate-y-2 hover:shadow-glow flex flex-col cursor-pointer";
+          card.onclick = () => {
+            if (url.includes('docs.google.com') || url.includes('forms.gle')) {
+              window.open(url, '_blank');
+            } else {
+              openGame(title, url);
+            }
+          };
+          
+          card.innerHTML = `
+            <div class="aspect-video w-full overflow-hidden relative bg-theme-alt">
+                <img src="${img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" ${imgStyle} loading="lazy" onerror="this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center gap-2 bg-theme-alt\'><span class=\'text-5xl font-retro text-theme-accent/30\'>${title.charAt(0).toUpperCase()}</span><span class=\'text-theme-muted text-xs uppercase tracking-widest\'>No Preview</span></div>'">
+                <div class="absolute inset-0 bg-gradient-to-t from-theme-card to-transparent"></div>
+                <span class="absolute top-2 right-2 text-[10px] font-bold px-2 py-1 bg-theme-bg/60 backdrop-blur-md rounded-md border border-theme-text/10 text-theme-text uppercase tracking-wider">${category}</span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+                <h3 class="text-theme-text font-bold text-lg leading-tight group-hover:text-theme-accent transition-colors">${title}</h3>
+                <div class="mt-4 flex items-center gap-2 text-xs text-theme-muted font-medium group-hover:text-theme-accent transition-colors">
+                    <i data-lucide="play-circle" class="w-4 h-4"></i> PLAY NOW
+                </div>
+            </div>
+          `;
+          gamesGrid.appendChild(card);
+        });
+
+        lucide.createIcons();
+      }
+
+      function filterAndRender() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filtered = _GAMES.filter(game => {
+          const title = game[0].toLowerCase();
+          const category = game[3].toLowerCase();
+          const matchesSearch = title.includes(searchTerm);
+          const matchesCategory = currentCategory === 'All' || category === currentCategory.toLowerCase();
+          return matchesSearch && matchesCategory;
+        });
+        renderGames(filtered);
+      }
+
+      searchInput.addEventListener('input', filterAndRender);
+
+      // --- In-Game Buttons Logic ---
+      document.getElementById('btn-back-library').addEventListener('click', () => {
+        gameIframe.src = ""; 
+        activeGameContainer.classList.add('hidden-view');
+        activeGameContainer.classList.remove('flex');
+        browseContainer.classList.remove('hidden-view');
+      });
+
+      document.getElementById('btn-fullscreen').addEventListener('click', () => {
+        if (gameIframe.requestFullscreen) {
+          gameIframe.requestFullscreen();
+        } else if (gameIframe.webkitRequestFullscreen) {
+          gameIframe.webkitRequestFullscreen();
+        } else if (gameIframe.msRequestFullscreen) {
+          gameIframe.msRequestFullscreen();
+        }
+      });
+
+
+      // --- Background Animation Logic ---
+      (function initBackground() {
+        const canvas = document.getElementById('bg-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        const DOT_SPACING = 30;
+        const DOT_SIZE = 1.5;
+        const MOUSE_RADIUS = 150;
+        const RETURN_SPEED = 0.1;
+
+        let dots = [];
+        let mouse = { x: -1000, y: -1000 };
+
+        function resize() {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width;
+          canvas.height = height;
+          initDots();
+        }
+
+        function initDots() {
+          dots = [];
+          const cols = Math.ceil(width / DOT_SPACING);
+          const rows = Math.ceil(height / DOT_SPACING);
+          for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+              const x = i * DOT_SPACING + (width % DOT_SPACING) / 2;
+              const y = j * DOT_SPACING + (height % DOT_SPACING) / 2;
+              dots.push({ x, y, ox: x, oy: y });
+            }
+          }
+        }
+
+        function animate() {
+          if (!appSettings.particles) {
+            requestAnimationFrame(animate);
+            return;
+          }
+
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+
+          dots.forEach(dot => {
+            const dx = mouse.x - dot.ox;
+            const dy = mouse.y - dot.oy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < MOUSE_RADIUS) {
+              const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+              const angle = Math.atan2(dy, dx);
+              const push = force * 40;
+              const targetX = dot.ox - Math.cos(angle) * push;
+              const targetY = dot.oy - Math.sin(angle) * push;
+              dot.x += (targetX - dot.x) * 0.2;
+              dot.y += (targetY - dot.y) * 0.2;
+            } else {
+              dot.x += (dot.ox - dot.x) * RETURN_SPEED;
+              dot.y += (dot.oy - dot.y) * RETURN_SPEED;
+            }
+
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, DOT_SIZE, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+
+        resize();
+        animate();
+      })();
+
+      // --- System Navigation & Sidebar ---
+      const viewLibrary = document.getElementById('view-library');
+      const enterBtn = document.getElementById('enter-btn');
+      
+      const sidebar = document.getElementById('sidebar');
+      const mobileOverlay = document.getElementById('mobile-overlay');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navButtons = document.querySelectorAll('.nav-btn');
+
+      enterBtn.addEventListener('click', () => {
+        // Auto-start music on enter (satisfies browser autoplay policy)
+        if (musicShouldPlay && currentTrackFile && musicMuted) {
+          musicMuted = false;
+          lobbyAudio.src = currentTrackFile;
+          lobbyAudio.play().catch(function() {});
+          updateMusicButton();
+        }
+        viewHome.style.opacity = '0';
+        setTimeout(() => {
+          viewHome.classList.add('hidden-view');
+          viewLibrary.classList.remove('hidden-view');
+          void viewLibrary.offsetWidth; 
+          viewLibrary.classList.add('fade-in');
+          filterAndRender(); 
+        }, 500);
+      });
+
+      function toggleSidebar() {
+        const isOpen = !sidebar.classList.contains('-translate-x-full');
+        if (isOpen) {
+          sidebar.classList.add('-translate-x-full');
+          mobileOverlay.classList.add('hidden-view');
+        } else {
+          sidebar.classList.remove('-translate-x-full');
+          mobileOverlay.classList.remove('hidden-view');
+        }
+      }
+
+      mobileMenuBtn.addEventListener('click', toggleSidebar);
+      mobileOverlay.addEventListener('click', toggleSidebar);
+
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          navButtons.forEach(b => {
+            b.classList.remove('bg-theme-text/10', 'text-theme-text', 'shadow-glow', 'border-theme-text/10', 'translate-x-1');
+            b.classList.add('text-theme-muted', 'hover:bg-theme-text/5', 'hover:text-theme-text', 'hover:translate-x-1', 'border-transparent');
+          });
+
+          btn.classList.remove('text-theme-muted', 'hover:bg-theme-text/5', 'hover:text-theme-text', 'hover:translate-x-1', 'border-transparent');
+          btn.classList.add('bg-theme-text/10', 'text-theme-text', 'shadow-glow', 'border-theme-text/10', 'translate-x-1');
+
+          const targetView = btn.getAttribute('data-view');
+          
+          if (targetView === 'settings') {
+             gameIframe.src = "";
+             browseContainer.classList.add('hidden-view');
+             activeGameContainer.classList.add('hidden-view');
+             activeGameContainer.classList.remove('flex');
+             
+             settingsContainer.classList.remove('hidden-view');
+             settingsContainer.classList.add('flex');
+          } else if (targetView === 'browse') {
+             gameIframe.src = "";
+             settingsContainer.classList.add('hidden-view');
+             settingsContainer.classList.remove('flex');
+             activeGameContainer.classList.add('hidden-view');
+             activeGameContainer.classList.remove('flex');
+             
+             browseContainer.classList.remove('hidden-view');
+             
+             currentCategory = btn.getAttribute('data-cat') || 'All';
+             filterAndRender();
+          }
+
+          if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
+            toggleSidebar();
+            }
       `}</style>
     </div>
   );
@@ -483,3 +1251,5 @@ import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<App />);
+
+         
